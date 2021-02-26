@@ -8,24 +8,13 @@ export const Dashboard: React.FC = () => {
   return (
     <>
       <GridContainer spacing={4}>
-        <Grid item xs={12} xl={3} lg={3} md={4}>
-          <NoteCard />
-        </Grid>
-        <Grid item xs={12} xl={3} lg={3} md={4}>
-          <NoteCard />
-        </Grid>
-        <Grid item xs={12} xl={3} lg={3} md={4}>
-          <NoteCard />
-        </Grid>
-        <Grid item xs={12} xl={3} lg={3} md={4}>
-          <NoteCard />
-        </Grid>
-        <Grid item xs={12} xl={3} lg={3} md={4}>
-          <NoteCard />
-        </Grid>
-        <Grid item xs={12} xl={3} lg={3} md={4}>
-          <NoteCard />
-        </Grid>
+        {Array(45)
+          .fill(0)
+          .map(() => (
+            <Grid item xs={12} xl={3} lg={3} md={4}>
+              <NoteCard />
+            </Grid>
+          ))}
       </GridContainer>
 
       <FloatingButtonBlock title="Add new note" aria-label="add" placement="left">
