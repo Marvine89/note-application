@@ -9,7 +9,7 @@ export const AppRouter: React.FC = () => {
     <Router>
       <Switch>
         <Route exact path="/" component={Dashboard} />
-        <Route path="/users" component={ViewNotes} />
+        <Route path="/notes/:id" component={ViewNotes} />
         <Route path="*" component={NotFound} />
       </Switch>
     </Router>

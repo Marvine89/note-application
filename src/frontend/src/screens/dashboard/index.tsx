@@ -1,35 +1,51 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
-import { FloatingButtonBlock, GridContainer } from "./styles";
-import { Grid, Fab } from "@material-ui/core";
-import { NoteCard } from "../../components/card";
-import { useDispatch } from "react-redux";
-import { fetchNotesRequest } from "../../redux/modules/note/actions";
+import { GridContainer, Input, InputBlock } from "./styles";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchNotesRequest, FETCH_NOTES_LOADING_KEY } from "../../redux/modules/note/actions";
+import { getNotes } from "../../redux/modules/note/selectors";
+import { useLoading } from "../../hooks/use-loading.hook";
+import { LoadingContainer } from "../../components/loader/loader-container";
+import { DashboardNoteCard } from "./component/note-card";
+import { useHistory } from "react-router-dom";
+import { FloatingButton } from "../../components/floating-button";
 
 export const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
+  let history = useHistory();
+  const notes = useSelector(getNotes);
+  const isLoading = useLoading(FETCH_NOTES_LOADING_KEY);
+  const [searchText, setSearchText] = useState<string>("");
 
   useEffect(() => {
     dispatch(fetchNotesRequest());
   }, [dispatch]);
 
+  const navigateToNote = (id: string) => {
+    if (!id) return;
+    history.push(`/notes/${id}`);
+  };
+
   return (
     <>
       <GridContainer spacing={4}>
-        {Array(45)
-          .fill(0)
-          .map(() => (
-            <Grid item xs={12} xl={3} lg={3} md={4}>
-              <NoteCard />
-            </Grid>
-          ))}
+        {isLoading ? (
+          <LoadingContainer height={300} />
+        ) : (
+          <>
+            <InputBlock>
+              <Input label="Search note" variant="outlined" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+            </InputBlock>
+            {notes?.map((note, i) => (
+              <DashboardNoteCard note={note} onClick={navigateToNote} key={i}/>
+            ))}
+          </>
+        )}
       </GridContainer>
 
-      <FloatingButtonBlock title="Add new note" aria-label="add" placement="left">
-        <Fab color="primary" aria-label="add">
-          <AddIcon />
-        </Fab>
-      </FloatingButtonBlock>
+      <FloatingButton title="Add new note" label="add" placement="left">
+        <AddIcon />
+      </FloatingButton>
     </>
   );
 };

@@ -1,31 +1,34 @@
 import React from "react";
 import { CardActionArea, CardContent, CardMedia, Button, Typography } from "@material-ui/core";
-import { CardWrapper, CardButtonActions } from "./styles";
+import { CardWrapper, CardButtonActions, NoteText } from "./styles";
+import { Note } from "../../redux/modules/note/types";
+import { truncate } from "../../utils/helpers/helpers";
 
-interface NoteCardProps {}
+interface NoteCardProps {
+  note: Note;
+  onClick: (v: string) => void;
+}
 
-export const NoteCard: React.FC<NoteCardProps> = () => {
+export const NoteCard: React.FC<NoteCardProps> = ({ note, onClick }) => {
   return (
     <CardWrapper>
-      <CardActionArea disableTouchRipple={true}>
+      <CardActionArea disableTouchRipple={true} onClick={() => onClick(note.id)}>
         <CardMedia
           component="img"
           alt="Contemplative Reptile"
           height="140"
-          image="https://via.placeholder.com/690x388.png"
+          image="https://via.placeholder.com/1440px288.png"
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+            {note.title}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica
-          </Typography>
+          <NoteText>{truncate(note.text, 135)}</NoteText>
         </CardContent>
       </CardActionArea>
       <CardButtonActions>
-        <Button size="medium" color="primary">
+        <Button size="medium" color="primary" onClick={() => onClick(note.id)}>
           View
         </Button>
         <Button size="medium" color="secondary">

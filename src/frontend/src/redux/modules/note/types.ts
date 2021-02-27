@@ -1,7 +1,7 @@
 export type Notes = Note[];
 
 export interface Note {
-  id: number;
+  id: string;
   title: string;
   subTitle?: string;
   text: string;
