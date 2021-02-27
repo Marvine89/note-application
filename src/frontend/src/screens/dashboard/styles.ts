@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Tooltip from '@material-ui/core/Tooltip';
-import { device } from "../../css/media-query";
+import { device } from "../../styles/media-query";
 import { Grid } from "@material-ui/core";
 
 export const GridContainer = styled(Grid).attrs({
