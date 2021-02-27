@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import { FloatingButtonBlock, GridContainer } from "./styles";
 import { Grid, Fab } from "@material-ui/core";
 import { NoteCard } from "../../components/card";
+import { useDispatch } from "react-redux";
+import { fetchNotesRequest } from "../../redux/modules/note/actions";
 
 export const Dashboard: React.FC = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchNotesRequest());
+  }, [dispatch]);
+
   return (
     <>
       <GridContainer spacing={4}>
