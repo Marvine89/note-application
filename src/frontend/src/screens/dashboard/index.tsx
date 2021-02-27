@@ -26,6 +26,8 @@ export const Dashboard: React.FC = () => {
     history.push(`/notes/${id}`);
   };
 
+  const filteredNotes = searchText ? notes?.filter((n) => n.title.includes(searchText)) : notes;
+
   return (
     <>
       <GridContainer spacing={4}>
@@ -36,8 +38,8 @@ export const Dashboard: React.FC = () => {
             <InputBlock>
               <Input label="Search note" variant="outlined" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
             </InputBlock>
-            {notes?.map((note, i) => (
-              <DashboardNoteCard note={note} onClick={navigateToNote} key={i}/>
+            {filteredNotes?.map((note, i) => (
+              <DashboardNoteCard note={note} onClick={navigateToNote} key={i} />
             ))}
           </>
         )}
