@@ -7,7 +7,7 @@
 ## Run Application
 ### Run Frontend and Backend together on dev mode
 - `npm start`
-### Backend backend
+### Run backend
  - `npm run backend`
 ### Run frontend
 - `npm run frontend` or
