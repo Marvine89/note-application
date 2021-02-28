@@ -15,6 +15,8 @@
 
 ## Build Application
 
+### Build & Run frontend and Backend together
+- `npm run build:run`
 ### Build frontend and Backend together
 - `npm run build`
 ### Build backend
