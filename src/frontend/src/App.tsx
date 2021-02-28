@@ -6,6 +6,7 @@ import { ToolBar } from "./components/tool-bar";
 import { AppRouter } from "./routes/routes";
 import { AddNoteModal } from "./components/add-note-modal";
 import { SnackBar } from "./components/snack-bar";
+import { EditNoteModal } from "./components/edit-note-modal";
 
 function App() {
   const queryClient = new QueryClient();
@@ -15,6 +16,7 @@ function App() {
         <ToolBar />
         <AppRouter />
         <AddNoteModal />
+        <EditNoteModal />
         <SnackBar />
       </QueryClientProvider>
     </Provider>

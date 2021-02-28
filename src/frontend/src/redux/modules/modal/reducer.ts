@@ -1,9 +1,10 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { showAddNoteModal, showSnackBar } from "./actions";
+import { showAddNoteModal, showEditNoteModal, showSnackBar } from "./actions";
 import { AlertState } from "./types";
 
 const INITIAL_STATE: AlertState = {
   showAddNoteModal: false,
+  showEditNoteModal: false,
 };
 
 export const modalReducer = createReducer(INITIAL_STATE, (builder) => {
@@ -12,7 +13,10 @@ export const modalReducer = createReducer(INITIAL_STATE, (builder) => {
       const { payload } = action;
       return { ...state, showAddNoteModal: payload };
     })
-    .addCase(showSnackBar, (state, action) => {
+    .addCase(showEditNoteModal, (state, action) => {
+      const { payload } = action;
+      return { ...state, showEditNoteModal: payload };
+    }).addCase(showSnackBar, (state, action) => {
       const { payload } = action;
       return { ...state, showSnackBar: payload };
     });
