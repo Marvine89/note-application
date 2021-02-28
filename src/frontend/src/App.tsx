@@ -12,9 +12,9 @@ function App() {
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
+        <ToolBar />
         <AppRouter />
         <AddNoteModal />
-        <ToolBar />
         <SnackBar />
       </QueryClientProvider>
     </Provider>
