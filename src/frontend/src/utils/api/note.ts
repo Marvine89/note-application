@@ -1,6 +1,6 @@
 import { showSnackBar } from "../../redux/modules/modal/actions";
-import { fetchNotesRequestSuccess } from "../../redux/modules/note/actions";
-import { Note, NotesResponse } from "../../redux/modules/note/types";
+import { fetchNoteRequestSuccess, fetchNotesRequestSuccess } from "../../redux/modules/note/actions";
+import { Note, NoteResponse, NotesResponse } from "../../redux/modules/note/types";
 import { store } from "../../redux/root.store";
 import { client } from "./api";
 
@@ -15,10 +15,10 @@ export const addNoteRequest = async (notes: Note): Promise<NotesResponse | void>
   }
 };
 
-export const editNoteRequest = async (notes: Note): Promise<NotesResponse | void> => {
+export const editNoteRequest = async (notes: Note): Promise<NoteResponse | void> => {
   try {
-    const response = await client.put<NotesResponse>("/notes", notes);
-    store.dispatch(fetchNotesRequestSuccess(response.data));
+    const response = await client.put<NoteResponse>("/notes", notes);
+    store.dispatch(fetchNoteRequestSuccess(response.data));
     return response.data;
   } catch (e) {
     store.dispatch(showSnackBar({ open: true, type: "error", message: "An error has occured" }));

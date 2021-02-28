@@ -9,7 +9,7 @@ export const getNotes = (_, res) => {
 export const getNote = (req, res) => {
   const { id } = req.params;
   const note = NOTES.find((n) => n.id === id);
-  
+
   if (!note) return res.status(404).send('not found');
   res.json(note);
 };
@@ -38,7 +38,7 @@ export const updateNote = (req, res) => {
   const id = NOTES[index].id;
   NOTES[index] = { ...note, id };
 
-  res.json(NOTES);
+  res.json(NOTES[index]);
 };
 
 export const deleteNote = (req, res) => {
