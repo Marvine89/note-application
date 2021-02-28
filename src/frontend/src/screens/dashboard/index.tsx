@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
-import { GridContainer, Input, InputBlock } from "./styles";
+import { GridContainer } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchNotesRequest, FETCH_NOTES_LOADING_KEY } from "../../redux/modules/note/actions";
 import { getNotes } from "../../redux/modules/note/selectors";
@@ -9,6 +9,8 @@ import { LoadingContainer } from "../../components/loader/loader-container";
 import { DashboardNoteCard } from "./component/note-card";
 import { useHistory } from "react-router-dom";
 import { FloatingButton } from "../../components/floating-button";
+import { SearchInput } from "./component/search-input";
+import { showAddNoteModal } from "../../redux/modules/modal/actions";
 
 export const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,6 +18,7 @@ export const Dashboard: React.FC = () => {
   const notes = useSelector(getNotes);
   const isLoading = useLoading(FETCH_NOTES_LOADING_KEY);
   const [searchText, setSearchText] = useState<string>("");
+  const filteredNotes = searchText ? notes?.filter((n) => n.title.toLowerCase().includes(searchText.toLowerCase())) : notes;
 
   useEffect(() => {
     dispatch(fetchNotesRequest());
@@ -26,7 +29,9 @@ export const Dashboard: React.FC = () => {
     history.push(`/notes/${id}`);
   };
 
-  const filteredNotes = searchText ? notes?.filter((n) => n.title.includes(searchText)) : notes;
+  const showAddModal = () => {
+    dispatch(showAddNoteModal(true));
+  };
 
   return (
     <>
@@ -35,9 +40,7 @@ export const Dashboard: React.FC = () => {
           <LoadingContainer height={300} />
         ) : (
           <>
-            <InputBlock>
-              <Input label="Search note" variant="outlined" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
-            </InputBlock>
+            <SearchInput label="Search note" value={searchText} onChange={(v: string) => setSearchText(v)} />
             {filteredNotes?.map((note, i) => (
               <DashboardNoteCard note={note} onClick={navigateToNote} key={i} />
             ))}
@@ -45,7 +48,7 @@ export const Dashboard: React.FC = () => {
         )}
       </GridContainer>
 
-      <FloatingButton title="Add new note" label="add" placement="left">
+      <FloatingButton title="Add new note" label="add" placement="left" onClick={showAddModal}>
         <AddIcon />
       </FloatingButton>
     </>

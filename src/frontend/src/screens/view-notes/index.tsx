@@ -38,7 +38,7 @@ export const ViewNotes: React.FC = () => {
         </Container>
       )}
 
-      <FloatingButton title="Edit note" label="edit" placement="left">
+      <FloatingButton title="Edit note" label="edit" placement="left" onClick={() => {}}>
         <Edit />
       </FloatingButton>
     </>

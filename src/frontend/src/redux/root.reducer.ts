@@ -1,12 +1,12 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import { loadingReducer } from "./modules/loading/reducer";
-import { alertReducer } from "./modules/alert/reducer";
+import { modalReducer } from "./modules/modal/reducer";
 import { noteReducer } from "./modules/note/reducer";
 
 export const reducers = combineReducers({
   loading: loadingReducer,
   note: noteReducer,
-  alert: alertReducer,
+  modal: modalReducer,
 });
 
 export type AppState = ReturnType<typeof reducers>;
