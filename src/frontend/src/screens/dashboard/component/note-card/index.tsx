@@ -1,10 +1,10 @@
 import { Grid } from "@material-ui/core";
 import React from "react";
 import { NoteCard } from "../../../../components/card";
-import { Note } from "../../../../redux/modules/note/types";
+import { NoteResponse } from "../../../../redux/modules/note/types";
 
 interface DashboardNoteCardProp {
-  note: Note;
+  note: NoteResponse;
   onClick: (v: string) => void;
 }
 

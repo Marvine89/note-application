@@ -1,11 +1,11 @@
 import React from "react";
 import { CardActionArea, CardContent, CardMedia, Button, Typography } from "@material-ui/core";
 import { CardWrapper, CardButtonActions, NoteText } from "./styles";
-import { Note } from "../../redux/modules/note/types";
+import { NoteResponse } from "../../redux/modules/note/types";
 import { truncate } from "../../utils/helpers/helpers";
 
 interface NoteCardProps {
-  note: Note;
+  note: NoteResponse;
   onClick: (v: string) => void;
 }
 
