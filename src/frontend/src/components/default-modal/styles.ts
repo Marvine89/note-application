@@ -21,8 +21,8 @@ export const ModalWrapper = styled(Modal).attrs({
 export const ModalContainer = styled.div`
     background-color: ${APP_COLORS.white};
     box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 5px 8px 0px rgb(0 0 0 / 14%), 0px 1px 14px 0px rgb(0 0 0 / 12%);
-    padding: 0px 10px 6px;
-    width: 90%;
+    padding: 0px 10px 10px;
+    width: 300px;
     margin: auto;
     box-sizing: border-box;
 
