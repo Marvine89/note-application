@@ -1,3 +1,4 @@
+import { showSnackBar } from "../../redux/modules/modal/actions";
 import { fetchNotesRequestSuccess } from "../../redux/modules/note/actions";
 import { Note, NotesResponse } from "../../redux/modules/note/types";
 import { store } from "../../redux/root.store";
@@ -9,8 +10,8 @@ export const addNoteRequest = async (notes: Note): Promise<NotesResponse | void>
     store.dispatch(fetchNotesRequestSuccess(response.data));
     return response.data;
   } catch (e) {
-    // handle error here
-    return;
+    store.dispatch(showSnackBar({ open: true, type: "error", message: "An error has occured" }));
+    throw new Error("An error has occured");
   }
 };
 
@@ -20,8 +21,8 @@ export const editNoteRequest = async (notes: Note): Promise<NotesResponse | void
     store.dispatch(fetchNotesRequestSuccess(response.data));
     return response.data;
   } catch (e) {
-    // handle error here
-    return;
+    store.dispatch(showSnackBar({ open: true, type: "error", message: "An error has occured" }));
+    throw new Error("An error has occured");
   }
 };
 
@@ -31,7 +32,7 @@ export const deleteNoteRequest = async (id: number): Promise<NotesResponse | voi
     store.dispatch(fetchNotesRequestSuccess(response.data));
     return response.data;
   } catch (e) {
-    // handle error here
-    return;
+    store.dispatch(showSnackBar({ open: true, type: "error", message: "An error has occured" }));
+    throw new Error("An error has occured");
   }
 };

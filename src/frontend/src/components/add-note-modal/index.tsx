@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useMutation } from "react-query";
-import { showAddNoteModal } from "../../redux/modules/modal/actions";
+import { showAddNoteModal, showSnackBar } from "../../redux/modules/modal/actions";
 import { getShowAddNoteModal } from "../../redux/modules/modal/selectors";
 import { DefaultModal } from "../default-modal";
 import { ButtonBlock, Input, InputForm, InputError, InputGroup, ModalButton, Title } from "./styles";
 import { addNoteRequest } from "../../utils/api/note";
 import { CircularProgress } from "@material-ui/core";
+import { NotesResponse } from "../../redux/modules/note/types";
 
 const FORM_SCHEMA = Yup.object().shape({
   title: Yup.string().required("The title is required"),
@@ -44,8 +45,9 @@ export const AddNoteModal: React.FC = () => {
     }
   }
 
-  function onSuccess() {
-      
+  function onSuccess(v: NotesResponse | void) {
+    dispatch(showSnackBar({ open: true, type: "success", message: "Note successfully added" }));
+    dispatch(showAddNoteModal(false));
   }
 
   useEffect(() => {
