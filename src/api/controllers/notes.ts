@@ -9,6 +9,7 @@ export const getNotes = (_, res) => {
 export const getNote = (req, res) => {
   const { id } = req.params;
   const note = NOTES.find((n) => n.id === id);
+  
   if (!note) return res.status(404).send('not found');
   res.json(note);
 };
