@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"npm run backend\" \"npm run frontend\"",
-    "build": "concurrently \"npm run build:backend\" \"npm run build:frontend\"",
+    "build": "concurrently \"npm run build:backend\" \"npm run build:frontend:move\"",
     "backend": "nodemon index.ts",
     "frontend": "npm start --prefix src/frontend",
     "build:backend": "tsc --project ./",
     "build:frontend": "npm run --prefix src/frontend build",
+    "build:frontend:move": "npm run --prefix src/frontend build:move",
     "postinstall": "npm i --prefix src/frontend",
     "env:develop": "cat ./.env-template > ./.env"
   },
