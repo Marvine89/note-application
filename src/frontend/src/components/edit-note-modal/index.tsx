@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -30,7 +30,7 @@ export const EditNoteModal: React.FC = () => {
   const dispatch = useDispatch();
   const open = useSelector(getShowEditNoteModal);
   const note = useSelector(getNote);
-  const { values, touched, errors, isValid, handleChange, handleBlur, handleSubmit } = useFormik<FormState>({
+  const { values, touched, errors, isValid, handleChange, handleBlur, handleSubmit, setValues } = useFormik<FormState>({
     validationSchema: FORM_SCHEMA,
     validateOnChange: true,
     initialValues: {
@@ -41,6 +41,15 @@ export const EditNoteModal: React.FC = () => {
     },
     onSubmit: submitNote,
   });
+
+  useEffect(() => {
+    setValues({
+      id: note?.id,
+      title: note?.title,
+      subTitle: note?.subTitle,
+      text: note?.text,
+    });
+  }, [note, setValues]);
 
   const { mutate, isLoading } = useMutation(editNoteRequest, { onSuccess: onSuccess });
   const isFormValid = isValid && values.id && values.title && values.subTitle && values.text;

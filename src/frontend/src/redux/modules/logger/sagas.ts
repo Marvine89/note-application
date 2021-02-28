@@ -1,10 +1,15 @@
-import { call, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
+import { showSnackBar } from "../modal/actions";
 import { ErrorState } from "./types";
 
 export function* processLog({ payload: error }: { type: string; payload: ErrorState }) {
   try {
     if (error.statusCode !== 200) {
-      // handle error here
+      if (error.statusCode === 404) {
+        yield put(showSnackBar({ open: true, type: "error", message: "Note not found" }));
+      } else {
+        yield put(showSnackBar({ open: true, type: "error", message: "An error has occured" }));
+      }
     }
 
     yield call(() => {
