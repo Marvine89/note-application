@@ -1,20 +1,26 @@
 # NOTE ASSESSMENT APPLICATION
 
+## Install Dependencies
+- Run `npm i`, this will trigger frontend dependancy installment automatically or
+- You can navigate inside the frontend folder `cd src/frontend` and run `npm i`
+
 ## Run Application
 ### Run Frontend and Backend together on dev mode
 - `npm start`
-### Backend Frontend
- - `npm run:backend`
-### Run Frontend
-- `npm run:frontend` or
-- Navigate inside the frontend folder and run `npm start`
+### Run backend
+ - `npm run backend`
+### Run frontend
+- `npm run frontend` or
+- Navigate inside the frontend folder `cd src/frontend` and run `npm start`
 
 ## Build Application
 
-### Run Frontend and Backend together on dev mode
+### Build & Run frontend and Backend together
+- `npm run build:run`
+### Build frontend and Backend together
 - `npm run build`
-### Backend Frontend
- - `npm run:build:backend`
-### Run Frontend
-- `npm run:build:frontend` or
+### Build backend
+ - `npm run build:backend`
+### Run frontend
+- `npm run build:frontend` or
 - Navigate inside the frontend folder and run `npm run build`
