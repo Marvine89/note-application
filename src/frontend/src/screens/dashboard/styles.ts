@@ -11,3 +11,10 @@ export const GridContainer = styled(Grid).attrs({
       padding: 100px 4%;
     }
 `;
+
+export const EmptyNoteText = styled.p`
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 20px auto;
+`;

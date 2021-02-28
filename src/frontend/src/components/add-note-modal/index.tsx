@@ -9,7 +9,6 @@ import { DefaultModal } from "../default-modal";
 import { ButtonBlock, Input, InputForm, InputError, InputGroup, ModalButton, Title } from "./styles";
 import { addNoteRequest } from "../../utils/api/note";
 import { CircularProgress } from "@material-ui/core";
-import { NotesResponse } from "../../redux/modules/note/types";
 
 const FORM_SCHEMA = Yup.object().shape({
   title: Yup.string().required("The title is required"),
@@ -45,7 +44,7 @@ export const AddNoteModal: React.FC = () => {
     }
   }
 
-  function onSuccess(v: NotesResponse | void) {
+  function onSuccess() {
     dispatch(showSnackBar({ open: true, type: "success", message: "Note successfully added" }));
     dispatch(showAddNoteModal(false));
   }

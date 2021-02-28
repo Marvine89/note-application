@@ -15,6 +15,8 @@ export const getNote = (req, res) => {
 export const insertNote = (req, res) => {
   const note: Note = req.body;
 
+  if (!note) return res.json(NOTES);
+
   NOTES.push({
     ...note,
     id: uuidv4(),
@@ -37,9 +39,11 @@ export const updateNote = (req, res) => {
 };
 
 export const deleteNote = (req, res) => {
-  const id = req.body.id;
+  const { id } = req.params;
 
   const index = NOTES.findIndex((n) => n.id === id);
+  if (index === -1) return res.json(NOTES);
+
   NOTES.splice(index, 1);
 
   res.json(NOTES);

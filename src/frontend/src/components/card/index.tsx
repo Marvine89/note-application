@@ -1,18 +1,20 @@
 import React from "react";
-import { CardActionArea, CardContent, CardMedia, Button, Typography } from "@material-ui/core";
+import { CardActionArea, CardContent, CardMedia, Button, Typography, CircularProgress } from "@material-ui/core";
 import { CardWrapper, CardButtonActions, NoteText } from "./styles";
 import { NoteResponse } from "../../redux/modules/note/types";
 import { truncate } from "../../utils/helpers/helpers";
 
 interface NoteCardProps {
   note: NoteResponse;
-  onClick: (v: string) => void;
+  onClick: () => void;
+  onDelete: () => void;
+  isDeleting: boolean;
 }
 
-export const NoteCard: React.FC<NoteCardProps> = ({ note, onClick }) => {
+export const NoteCard: React.FC<NoteCardProps> = ({ note, onClick, onDelete, isDeleting }) => {
   return (
     <CardWrapper>
-      <CardActionArea disableTouchRipple={true} onClick={() => onClick(note.id)}>
+      <CardActionArea disableTouchRipple={true} onClick={onClick}>
         <CardMedia
           component="img"
           alt="Contemplative Reptile"
@@ -28,11 +30,11 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note, onClick }) => {
         </CardContent>
       </CardActionArea>
       <CardButtonActions>
-        <Button size="medium" color="primary" onClick={() => onClick(note.id)}>
+        <Button size="medium" color="primary" onClick={onClick}>
           View
         </Button>
-        <Button size="medium" color="secondary">
-          Delete
+        <Button size="medium" color="secondary" onClick={onDelete}>
+          {isDeleting ? <CircularProgress color="primary" /> : "Delete"}
         </Button>
       </CardButtonActions>
     </CardWrapper>

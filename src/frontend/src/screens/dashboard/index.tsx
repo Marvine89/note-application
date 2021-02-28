@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
-import { GridContainer } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchNotesRequest, FETCH_NOTES_LOADING_KEY } from "../../redux/modules/note/actions";
 import { getNotes } from "../../redux/modules/note/selectors";
 import { useLoading } from "../../hooks/use-loading.hook";
 import { LoadingContainer } from "../../components/loader/loader-container";
 import { DashboardNoteCard } from "./component/note-card";
-import { useHistory } from "react-router-dom";
 import { FloatingButton } from "../../components/floating-button";
 import { SearchInput } from "./component/search-input";
 import { showAddNoteModal } from "../../redux/modules/modal/actions";
+import { EmptyNoteText, GridContainer } from "./styles";
 
 export const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
-  let history = useHistory();
+
   const notes = useSelector(getNotes);
   const isLoading = useLoading(FETCH_NOTES_LOADING_KEY);
   const [searchText, setSearchText] = useState<string>("");
@@ -23,11 +22,6 @@ export const Dashboard: React.FC = () => {
   useEffect(() => {
     dispatch(fetchNotesRequest());
   }, [dispatch]);
-
-  const navigateToNote = (id: string) => {
-    if (!id) return;
-    history.push(`/notes/${id}`);
-  };
 
   const showAddModal = () => {
     dispatch(showAddNoteModal(true));
@@ -42,8 +36,9 @@ export const Dashboard: React.FC = () => {
           <>
             <SearchInput label="Search note" value={searchText} onChange={(v: string) => setSearchText(v)} />
             {filteredNotes?.map((note, i) => (
-              <DashboardNoteCard note={note} onClick={navigateToNote} key={i} />
+              <DashboardNoteCard note={note} key={i} />
             ))}
+            {notes && notes?.length === 0 && <EmptyNoteText>You do not have any notes...</EmptyNoteText>}
           </>
         )}
       </GridContainer>

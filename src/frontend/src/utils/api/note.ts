@@ -26,7 +26,7 @@ export const editNoteRequest = async (notes: Note): Promise<NotesResponse | void
   }
 };
 
-export const deleteNoteRequest = async (id: number): Promise<NotesResponse | void> => {
+export const deleteNoteRequest = async (id: string): Promise<NotesResponse | void> => {
   try {
     const response = await client.delete<NotesResponse>(`/notes/${id}`);
     store.dispatch(fetchNotesRequestSuccess(response.data));
