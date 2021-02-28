@@ -1,7 +1,7 @@
 # NOTE ASSESSMENT APPLICATION
 
 ## Install Dependencies
-- Run `npm i`, this will trigger frontend dependancy installment automatically or
+- Run `npm i`, this will also install the frontend dependancies
 - You can navigate inside the frontend folder `cd src/frontend` and run `npm i`
 
 ## Run Application
