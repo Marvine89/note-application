@@ -1,5 +1,5 @@
 import React from "react";
 
 export const NotFound: React.FC = () => {
-  return null;
+  return <p>Oppss... wrong page</p>;
 };
