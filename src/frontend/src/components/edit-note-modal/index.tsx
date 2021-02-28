@@ -61,7 +61,7 @@ export const EditNoteModal: React.FC = () => {
   }
 
   function onSuccess() {
-    dispatch(showSnackBar({ open: true, type: "success", message: "Note successfully modified" }));
+    dispatch(showSnackBar({ open: true, type: "success", message: "Note successfully updated" }));
     handleClose();
   }
 
@@ -110,7 +110,7 @@ export const EditNoteModal: React.FC = () => {
             Cancel
           </ModalButton>
           <ModalButton color="primary" type="submit">
-            {isLoading ? <CircularProgress color="primary" /> : "Add note"}
+            {isLoading ? <CircularProgress color="primary" /> : "Update"}
           </ModalButton>
         </ButtonBlock>
       </InputForm>
